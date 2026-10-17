@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bar João & Maria — Caixa</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Bar João &amp; Maria<small>Caixa do balcão</small></h1>
+  <button class="btn btn-amber" id="abrirCaderneta">Caderneta do fiado<span class="badge" id="qtdDevedores">0</span></button>
+</header>
+
+<main>
+  <section aria-label="Cardápio">
+    <div class="tabs" id="tabs"></div>
+    <div class="grid" id="cardapio"></div>
+  </section>
+  <aside aria-label="Comanda atual">
+    <h2>Comanda atual</h2>
+    <div id="comanda"></div>
+    <div class="total"><span>Total</span><span id="total">R$ 0,00</span></div>
+    <div class="acoes" style="justify-content:stretch">
+      <button class="btn btn-ghost" id="limpar">Limpar</button>
+      <button class="btn btn-green" id="fechar" style="flex:1">Fechar conta</button>
+    </div>
+  </aside>
+</main>
+
+<dialog id="dlgFechar"><div class="modal">
+  <h2>Fechar conta — <span id="fecharTotal"></span></h2>
+  <div id="passoEscolha" class="opcoes">
+    <button class="btn btn-green" id="pagarAgora">Pagamento imediato<small>Registra a venda e zera a comanda</small></button>
+    <button class="btn btn-red" id="irFiado">Deixar fiado<small>Soma o valor à dívida do cliente</small></button>
+  </div>
+  <div id="passoFiado" hidden>
+    <label for="nomeCliente">Nome do cliente</label>
+    <input type="text" id="nomeCliente" list="sugestoes" autocomplete="off" maxlength="40">
+    <datalist id="sugestoes"></datalist>
+    <p id="erroNome" style="color:var(--red);margin:0 0 10px" hidden>Digite o nome do cliente para continuar.</p>
+    <div class="acoes">
+      <button class="btn btn-ghost" id="voltar">Voltar</button>
+      <button class="btn btn-red" id="confirmarFiado">Anotar na caderneta</button>
+    </div>
+  </div>
+  <div class="acoes" id="rodapeEscolha"><button class="btn btn-ghost" data-fechar>Cancelar</button></div>
+</div></dialog>
+
+<dialog id="dlgCaderneta"><div class="modal">
+  <h2>Caderneta do fiado</h2>
+  <div id="listaFiado"></div>
+  <div class="total" style="font-size:1.1rem"><span>Total a receber</span><span id="totalFiado"></span></div>
+  <div class="acoes"><button class="btn btn-ghost" data-fechar>Fechar</button></div>
+</div></dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
